@@ -37,43 +37,40 @@ namespace AppForSEII.API.Data {
 
         }
 
-        public static void SeedUsers(UserManager<ApplicationUser> userManager, List<string> roles) {
-            //first, it checks the user does not already exist in the DB
-            if (userManager.FindByNameAsync("elena@uclm.es").Result == null) {
-                ApplicationUser user = new ApplicationUser("1", "Elena", "Navarro Martínez", "elena@uclm.es");
-                user.EmailConfirmed = true;
+        public static void SeedUsers(UserManager<ApplicationUser> userManager, List<string> roles)
+        {
 
-                var result = userManager.CreateAsync(user, "Password1234%");
-                result.Wait();
+            List<ApplicationUser> users = new List<ApplicationUser> { 
+                new ApplicationUser("1", "Elena", "Navarro Martínez", "elena@uclm.es"), 
+                new ApplicationUser("2", "Aurora", "Macias", "aurora@uclm.es"),
+                new ApplicationUser("3", "Clara", "Ayora", "claran@uclm.es")                
+            
+            };
 
-                if (result.IsCompletedSuccessfully) {
-                    //administrator role
-                    userManager.AddToRoleAsync(user, roles[0]).Wait();
-                }
+            List<string> rolesNames = new List<string> { "Password1234$", "OtherPass12$", "OtherPass12$" };
+            
+            for (int i = 0; i < users.Count; i++)
+            {
+                SeedUser(userManager, roles, users[i], roles[i], "OtherPass12$");
             }
 
-
-            if (userManager.FindByNameAsync("peter@uclm.es").Result == null) {
-                //A customer class has been defined because it has different attributes (purchase, rental, etc.)
-                ApplicationUser user = new ApplicationUser("3", "Peter", "Jackson", "peter@uclm.es");
-                user.EmailConfirmed = true;
-
-                var result = userManager.CreateAsync(user, "OtherPass12$");
-
-                result.Wait();
-
-                if (result.IsCompletedSuccessfully) {
-                    //customer role
-                    userManager.AddToRoleAsync(user, roles[2]).Wait();
-
-                }
-            }
 
         }
 
-
-
-
-
+        private static void SeedUser(UserManager<ApplicationUser> userManager, List<string> roles, ApplicationUser user, string role, string password)
+        {
+            //first, it checks the user does not already exist in the DB
+            if (userManager.FindByNameAsync(user.UserName).Result == null)
+            {                
+                user.EmailConfirmed = true;
+                var result = userManager.CreateAsync(user, password);
+                result.Wait();
+                if (result.IsCompletedSuccessfully)
+                {
+                    //administrator role
+                    userManager.AddToRoleAsync(user, role).Wait();
+                }
+            }
+        }
     }
 }
