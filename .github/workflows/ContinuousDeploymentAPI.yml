@@ -7,6 +7,8 @@ on:
   push:
     branches:
       - 'ElenaNavarro-ContinuousDelivery' # Set a branch name to trigger deployment
+    #paths:                               #Set a path to trigger deployment
+      #- 'src/AppForSEII.API**'
   workflow_dispatch:
 
 jobs:
