@@ -14,14 +14,14 @@ builder.Services.AddControllers()
 // Add service for managing a sqlserver database that will be managed using ApplicationDBContext
 // the connection to the database was defined in appsettings
 
-string? connection2Database = Environment.GetEnvironmentVariable("DBConnection2Use");
+string? connection2Database = builder.Configuration.GetValue(typeof(string), "DBConnection2Use") as string;
 
 // If we are using the Production Environment, then the AZURE DB should be used,
 // otherwise the localdb or SQLite should be used
 //https://learn.microsoft.com/en-us/aspnet/core/fundamentals/environments?source=recommendations&view=aspnetcore-7.0
 switch (connection2Database) {
     case "SQLite":
-        DbConnection _connection = new SqliteConnection("Filename=:memory:");
+        DbConnection _connection = new SqliteConnection("Data Source=Application.db;Cache=Shared");
         //connection in case a persistent database is required
         //DbConnection _connection = new SqliteConnection("Data Source=Application.db;Cache=Shared");
         _connection.Open();
