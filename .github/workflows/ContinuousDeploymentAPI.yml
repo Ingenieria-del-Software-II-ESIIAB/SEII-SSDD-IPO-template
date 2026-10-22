@@ -1,14 +1,22 @@
 # This workflow will build and deploy an ASP.Net Core Web API to Azure Web App when a commit is pushed to the 'ElenaNavarro-ContinuousDelivery' branch or when manually triggered.
 
 
-name: Build and deploy ASP.Net Core app to Azure Web App - pruebaisii
+name: Build and deploy to Azure Web App - pruebaisii
 
 on:
   push:
     branches:
       - 'ElenaNavarro-ContinuousDelivery' # Set a branch name to trigger deployment
-    #paths:                               #Set a path to trigger deployment
-      #- 'src/AppForSEII.API**'
+
+  pull_request: 
+    branches:
+      - 'development'     
+    paths:                               #Set a path to trigger deployment
+      - 'src/AppForSEII.API**'      
+      
+    types: # triggers the workflow when a PR is closed. 
+      - closed      
+
   workflow_dispatch:
 
 jobs:
