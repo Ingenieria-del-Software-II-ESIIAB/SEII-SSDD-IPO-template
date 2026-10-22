@@ -21,7 +21,7 @@ string? connection2Database = builder.Configuration.GetValue(typeof(string), "DB
 //https://learn.microsoft.com/en-us/aspnet/core/fundamentals/environments?source=recommendations&view=aspnetcore-7.0
 switch (connection2Database) {
     case "SQLite":
-        DbConnection _connection = new SqliteConnection("Data Source=Application.db;Cache=Shared");
+        DbConnection _connection = new SqliteConnection("Filename=:memory:");
         //connection in case a persistent database is required
         //DbConnection _connection = new SqliteConnection("Data Source=Application.db;Cache=Shared");
         _connection.Open();
