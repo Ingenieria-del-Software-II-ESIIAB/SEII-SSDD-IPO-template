@@ -47,30 +47,26 @@ namespace AppForSEII.API.Data {
             
             };
 
-            List<string> rolesNames = new List<string> { "Password1234$", "OtherPass12$", "OtherPass12$" };
-            
+            List<string> passwords = new List<string> { "Password1234$", "OtherPass12$", "OtherPass12$" };
+            ApplicationUser user;
             for (int i = 0; i < users.Count; i++)
             {
-                SeedUser(userManager, roles, users[i], roles[i], "OtherPass12$");
-            }
-
-
-        }
-
-        private static void SeedUser(UserManager<ApplicationUser> userManager, List<string> roles, ApplicationUser user, string role, string password)
-        {
-            //first, it checks the user does not already exist in the DB
-            if (userManager.FindByNameAsync(user.UserName).Result == null)
-            {                
-                user.EmailConfirmed = true;
-                var result = userManager.CreateAsync(user, password);
-                result.Wait();
-                if (result.IsCompletedSuccessfully)
-                {
-                    //administrator role
-                    userManager.AddToRoleAsync(user, role).Wait();
+                user=users[i];
+                if (userManager.FindByNameAsync(user.UserName!).Result == null)
+                {                
+                    user.EmailConfirmed = true;
+                    var result = userManager.CreateAsync(user, passwords[i]);
+                    result.Wait();
+                    if (result.IsCompletedSuccessfully)
+                    {
+                        //administrator role
+                        userManager.AddToRoleAsync(user, roles[i]).Wait();
+                    }
                 }
             }
+
+
         }
+
     }
 }
