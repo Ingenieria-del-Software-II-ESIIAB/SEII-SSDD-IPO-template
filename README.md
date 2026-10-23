@@ -30,13 +30,11 @@ Puedes **instalar todas las extensiones** de la siguiente forma:
 Get-Content extensions4VSCode.txt | ForEach-Object { code --install-extension $_ }
 ```
 
-**Alternativamente*, puedes abrir cada extensión una a una. Para ello, abre la vista de extensiones (ctrl+shift+x).
+**Alternativamente*, puedes instalar las extensiones una a una. Para ello, abre la vista de extensiones (ctrl+shift+x).
 
 
 ![Extensiones](https://code.visualstudio.com/assets/docs/configure/extensions/extension-marketplace/extensions-view-icon.png)
 
-
-![Extensiones](https://code.visualstudio.com/assets/docs/configure/extensions/extension-marketplace/extensions-view-icon.png)
 
 Instalar en VS Code las extensiones para desarrollo:
 - C#
@@ -136,6 +134,12 @@ dotnet run --project MyApi/MyApi.csproj
 
 ```bash
 dotnet clean
+```
+
+7. En caso de necesitar resolver vulnerabilidades:
+
+```bash
+dotnet package update --vulnerable
 ```
 
 ## Ejecutar tareas
@@ -413,6 +417,12 @@ dotnet run --project MyApi/MyApi.csproj
 
 ```bash
 dotnet clean
+```
+
+7. To resolve vulnerabilities:
+
+```bash
+dotnet package update --vulnerable
 ```
 
 ## Run Tasks
