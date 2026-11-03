@@ -5,7 +5,7 @@ name: Elena Navarro Continuous Integration Pipeline
 
 on:
   push:
-    branches: [ "CI-ElenaNavarro" ]
+    branches: [ "CI-ElenaNavarro-doesnt exist" ]
   pull_request:
     branches: [ "CI-ElenaNavarro" ]
 
