@@ -12,7 +12,7 @@ namespace AppForSEII.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    ApplicationUsersController : ControllerBase
+    public class ApplicationUsersController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
         private readonly ILogger<ApplicationUsersController> _logger;
