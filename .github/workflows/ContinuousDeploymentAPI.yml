@@ -1,4 +1,4 @@
-# This workflow will build and deploy an ASP.Net Core Web API to Azure Web App when a commit is pushed to the 'ElenaNavarro-ContinuousDelivery' branch or when manually triggered.
+# This workflow will build and deploy an ASP.Net Core Web API to Azure Web App when a commit is pushed to the 'CI-ElenaNavarro' branch or when manually triggered.
 
 
 name: Build and deploy to Azure Web App - pruebaisii
@@ -11,8 +11,8 @@ on:
   pull_request: 
     branches:
       - 'development'     
-    # paths:                               #Set a path to trigger deployment
-    #   - 'src/AppForSEII.API**'      
+    paths:                               #Set a path to trigger deployment
+      - 'src/AppForSEII.API**'      
       
     types: # triggers the workflow when a PR is closed. 
       - closed      
@@ -56,6 +56,8 @@ jobs:
 
     # This condition ensures that the pipeline ONLY runs if the PR was closed because it was merged. 
     # If the PR was closed without merging (rejected), the job will be skipped.
+
+  #uncomment this line once your pipeline works
     # if: github.event.pull_request.merged == true
     
     runs-on: ubuntu-latest
@@ -81,6 +83,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
+        # replace pruebaisii with the name of your web app
           app-name: 'pruebaisii'
           # slot-name: 'Production'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_ELENA }}
