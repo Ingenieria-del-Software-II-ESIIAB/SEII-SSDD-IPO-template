@@ -6,7 +6,7 @@ name: Build and deploy to Azure Web App - pruebaisii
 on:
   push:
     branches:
-      - 'ElenaNavarro-ContinuousDelivery' # Set a branch name to trigger deployment
+      - 'CI-ElenaNavarro' # Set a branch name to trigger deployment
 
   pull_request: 
     branches:
